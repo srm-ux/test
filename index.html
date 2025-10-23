@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en" style="scrollbar-width: none;"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ediweb by lokash</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&amp;display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+    body {
+      margin: 0;
+      background: #f9f9f9;
+      color: #333;
+      min-height: 100vh;
+    }
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 40px;
+      background: white;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+    nav h2 {
+      margin: 0;
+      font-weight: 600;
+      color: #333;
+    }
+    nav ul {
+      display: flex;
+      gap: 25px;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      height: 20px;
+    }
+    nav ul li a {
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
+    }
+    nav ul li a:hover {
+      border-bottom: 2px solid #333;
+    }
+    header {
+      text-align: center;
+      padding: 150px 20px 20px;
+      background: white;
+      height: 550px;
+    }
+   /* Default (light mode) */
+header h1 {
+  font-size: 46px;
+  color: black;
+  margin-bottom: 10px;
+}
+/* Dark mode */
+body.dark-mode header h1 {
+  color: #ffffff;
+}
+    header p {
+      font-size: 15px;
+      color: #777;
+      max-width: 600px;
+      margin: 0 auto 30px;
+    }
+    .search-box {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 40px;
+    }
+    .search-box input {
+      padding: 10px;
+      width: 300px;
+      border: 1px solid #ccc;
+      border-radius: 4px 0 0 4px;
+      outline: none;
+    }
+    .search-box button {
+      padding: 10px 20px;
+      background: black;
+      color: white;
+      border: none;
+      border-radius: 0 4px 4px 0;
+      cursor: pointer;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      padding: 20px 40px 40px;
+      max-width: 1200px;
+      margin: auto;
+    }
+    .card {
+  background-color: #eee;
+  border-radius: 10px;
+  min-height: 180px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;
+  color: #1f1f1f; /* text for light mode */
+  padding: 20px;
+}
+
+.card a {
+  display: block;
+  width: 100%;
+  height: 100%;
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+body.dark-mode .card {
+  background-color: #2a2a2a;
+  color: #f0f0f0; /* ✅ make text readable in dark mode */
+}
+
+    .card h3 {
+      margin: 0;
+      font-size: 16px;
+      font-weight: 600;
+      color: #3f3f3f;
+    }
+    .card p {
+      margin: 4px 0 0;
+      font-size: 12px;
+      color: #3f3f3f;
+    }
+    footer {
+      text-align: center;
+      padding: 5px;
+      color: #aaa;
+      background: white;
+    }
+    #controls {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  background: white;
+  border: 1px solid #ccc;
+  padding: 15px;
+  z-index: 1000;
+  display: none;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  font-size: 14px;
+  max-width: 260px;
+  line-height: 1.6;
+}
+#controls label {
+  display: block;
+  margin-bottom: 8px;
+}
+#controls input[type="text"],
+#controls input[type="color"] {
+  width: 100%;
+  padding: 5px;
+  margin-top: 2px;
+  border: 1px solid #aaa;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+#controls button {
+  width: 100%;
+  background: #000;
+  color: white;
+  padding: 8px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+    #deployBtn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #000;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      z-index: 1000;
+    }
+    .selected {
+      outline: 2px dashed red;
+    }
+
+    body.dark-mode {
+  background: #121212;
+  color: #e0e0e0;
+}
+body.dark-mode nav,
+body.dark-mode header,
+body.dark-mode footer {
+  background: #1f1f1f;
+}
+body.dark-mode nav ul li a {
+  color: #e0e0e0;
+}
+body.dark-mode .card {
+  background-color: #2a2a2a;
+}
+body.dark-mode #controls {
+  background: #1f1f1f;
+  color: #eee;
+}
+body.dark-mode input,
+body.dark-mode button {
+  background: #333;
+  color: #eee;
+}
+
+#controls-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  padding: 0 5px;
+}
+
+#controls-header .label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+}
+
+#closeControls {
+  font-size: 16px;
+  color: #666;
+  cursor: pointer;
+  user-select: none;
+  line-height: 1;
+  padding: 0;
+  margin: 0;
+  display: inline-block;
+}
+
+#closeControls:hover {
+  color: red;
+  transform: scale(1.1);
+}
+
+ul {
+  display: flex;
+  gap: 20px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 18px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+ul li a {
+  display: inline-block;
+  text-decoration: none;
+  color: black;
+  font-weight: 600;
+}
+
+ul li a span {
+  display: inline-block;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+ul li a:hover span {
+  animation: wave 0.6s ease forwards;
+}
+
+/* Animation delay for up to 9 letters */
+ul li a:hover span:nth-child(1) { animation-delay: 0s; }
+ul li a:hover span:nth-child(2) { animation-delay: 0.05s; }
+ul li a:hover span:nth-child(3) { animation-delay: 0.1s; }
+ul li a:hover span:nth-child(4) { animation-delay: 0.15s; }
+ul li a:hover span:nth-child(5) { animation-delay: 0.2s; }
+ul li a:hover span:nth-child(6) { animation-delay: 0.25s; }
+ul li a:hover span:nth-child(7) { animation-delay: 0.3s; }
+ul li a:hover span:nth-child(8) { animation-delay: 0.35s; }
+ul li a:hover span:nth-child(9) { animation-delay: 0.4s; }
+
+@keyframes wave {
+  0% { transform: translateY(0); color: #525252; }
+  30% { transform: translateY(-6px); color: #ff0000; }
+  60% { transform: translateY(2px); }
+  100% { transform: translateY(0); color: #727272; }
+}
+
+/* About section styling */
+#about-section {
+  flex-wrap: wrap;
+  height: 600px;
+}
+
+#about-section .about-text h2 {
+  font-size: 28px;
+  margin-bottom: 10px;
+  font-weight: 600;
+  color: #333;
+}
+
+#about-section .about-text p {
+  font-size: 16px;
+  color: #555;
+  margin-bottom: 20px;
+  line-height: 1.6;
+}
+
+#about-section .about-text button:hover {
+  background: #ff0000;
+}
+
+/* Dark mode adjustments */
+body.dark-mode #about-section {
+  background: #3f3f3f;
+}
+
+body.dark-mode  .about-text p, h2{
+  color: #ccc;
+}
+
+/* Theme toggle button (default light mode) */
+#themeToggle {
+  margin-left: 20px;
+  padding: 8px 12px;
+  border-radius: 5px;
+  border: none;
+  background: #000;
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.3s, color 0.3s;
+}
+
+/* Dark mode button (invert colors) */
+body.dark-mode #themeToggle {
+  background: #fff;
+  color: #000;
+}
+
+/* Dark mode adjustments */
+
+/* Navbar */
+body.dark-mode nav h2 {
+  color: #e0e0e0; /* NAME text */
+}
+
+body.dark-mode nav ul li a {
+  color: #e0e0e0; /* links text */
+}
+
+/* Header */
+body.dark-mode header section h1 {
+  color: #ffffff;
+}
+
+body.dark-mode header p {
+  color: #cccccc;
+}
+
+/* About section */
+body.dark-mode #about-section .about-text h2 {
+  color: #ffffff;
+}
+
+body.dark-mode #about-section .about-text p {
+  color: #cccccc;
+}
+
+
+/* Dark mode styling for all sections */
+body.dark-mode section {
+  background-color: #181818;
+  color: #e0e0e0;
+}
+
+/* Optional: override nested card colors */
+body.dark-mode .card {
+  background-color: #242424;
+  color: #f0f0f0;
+}
+
+</style>
+</head>
+<body class="dark-mode">
+
+<nav>
+  <h2 style="color: rgb(224, 224, 224);">NAME</h2>
+  <ul>
+  <li><a href="#product" style="color: rgb(224, 224, 224);">
+    <span>H</span><span>O</span><span>M</span><span>E</span>
+  </a></li>
+
+  <li><a href="#about" style="color: rgb(224, 224, 224);">
+    <span>A</span><span>B</span><span>O</span><span>U</span><span>T</span>
+  </a></li>
+
+  <li><a href="#portfolio" style="color: rgb(224, 224, 224);">
+    <span>S</span><span>K</span><span>I</span><span>L</span><span>L</span><span>S</span>
+  </a></li>
+
+  <li><a href="#team" style="color: rgb(224, 224, 224);">
+    <span>P</span><span>R</span><span>O</span><span>J</span><span>E</span><span>C</span><span>T</span>
+  </a></li>
+
+  <li><a href="#contact" style="color: rgb(224, 224, 224);">
+    <span>C</span><span>O</span><span>N</span><span>T</span><span>A</span><span>C</span><span>T</span>
+  </a></li>
+</ul>
+
+
+</nav>
+
+<header>
+  <h1 style="color: rgb(224, 224, 224);" class="">Testing 1</h1>
+  <p style="color: rgb(224, 224, 224);">Your Job roles and Exp</p>
+</header>
+
+<section id="about-section" style="padding: 60px 40px; display: flex; align-items: center; gap: 40px;">
+  
+  <!-- Square Image Side -->
+<div class="about-image-wrapper editable-img-wrapper" style="flex: 1; display: flex; justify-content: center; align-items: center;">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Placeholder_view_vector.svg/681px-Placeholder_view_vector.svg.png?20220519031949" style="width: 100%; max-width: 400px; aspect-ratio: 1/1; object-fit: cover; border-radius: 25px;">
+</div>
+
+
+  <!-- Text Side -->
+  <div class="about-text" style="flex: 1; padding-right: 100px;">
+    <h2 style="color: rgb(224, 224, 224);">About Me</h2>
+    <p style="color: rgb(224, 224, 224);">This is the subheader text. You can edit this content to describe yourself or your work.</p>
+    <button style="padding: 10px 20px; background: black; color: white; border: none; border-radius: 6px; cursor: pointer;">
+      Learn More
+    </button>
+  </div>
+
+</section>
+
+<section style="padding: 30px 30px 0 30px; background: #ffffff00;">
+<h1 style="display: flex; justify-content: center;">PROJECTS</h1>
+<div class="grid">
+  <div class="card" style="background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Placeholder_view_vector.svg/681px-Placeholder_view_vector.svg.png?20220519031949');">
+    <a href="#">
+      <h3>Project 1</h3>
+      <p>Description for Project</p>
+    </a>
+  </div>
+  <div class="card" style="background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Placeholder_view_vector.svg/681px-Placeholder_view_vector.svg.png?20220519031949');">
+    <a href="#">
+      <h3>Project 2</h3>
+      <p>Description for Project</p>
+    </a>
+  </div>
+  <div class="card" style="background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Placeholder_view_vector.svg/681px-Placeholder_view_vector.svg.png?20220519031949');">
+    <a href="#">
+      <h3>Project 3</h3>
+      <p>Description for Project</p>
+    </a>
+  </div>
+  <div class="card" style="background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Placeholder_view_vector.svg/681px-Placeholder_view_vector.svg.png?20220519031949');">
+    <a href="#">
+      <h3>Project 4</h3>
+      <p>Description for Project</p>
+    </a>
+  </div>
+  <div class="card" style="background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Placeholder_view_vector.svg/681px-Placeholder_view_vector.svg.png?20220519031949');">
+    <a href="#">
+      <h3>Project 5</h3>
+      <p>Description for Project</p>
+    </a>
+  </div>
+  <div class="card" style="background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Placeholder_view_vector.svg/681px-Placeholder_view_vector.svg.png?20220519031949');">
+    <a href="#">
+      <h3>Project 6</h3>
+      <p>Description for Project</p>
+    </a>
+  </div>
+</div>
+</section>
+
+<footer>
+  <p>- - -  Developer By Lokash  - - -</p>
+</footer>
+
+
+
+
+
+
+
+
+<!-- Code injected by live-server -->
+
+
+</body></html>
